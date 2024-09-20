@@ -27,12 +27,13 @@ $ eksctl create fargateprofile \
 $ kubectl apply -f https://raw.githubusercontent.com/d-abhi/EKS-Test/main/2048_full.yml
 
 
-5. Approve IAM OIDC provider 
+5. Approve IAM OIDC provider ((ALB controller need access to ALB))  
+     ALB controller -> Pod -> Access to AWS services such as ALB
 
 $ eksctl utils associate-iam-oidc-provider --cluster $cluster_name --approve
 
 
-6. Download IAM policy
+6. Download IAM policy : - 
 
 $ curl -O https://raw.githubusercontent.com/d-abhi/EKS-Test/main/iam_policy.json
 
@@ -44,7 +45,6 @@ $ aws iam create-policy \
 
 8. Attaching the Role to service account of the pod.
 
-
 $ 
 eksctl create iamserviceaccount \
   --cluster=demo-cluster \
@@ -54,7 +54,10 @@ eksctl create iamserviceaccount \
   --attach-policy-arn=arn:aws:iam::471112994686:policy/AWSLoadBalancerControllerIAMPolicy \
   --approve
 
-9. Deploy ALB controller
+9. Deploy ALB controller 
+
+ingress controller -> ingress-2048 -> Load balancer -> target group , port
+
 
 $ helm repo add eks https://aws.github.io/eks-charts
 
