@@ -34,7 +34,7 @@ $ eksctl utils associate-iam-oidc-provider --cluster $cluster_name --approve
 
 6. Download IAM policy
 
-$ curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
+$ curl -O https://raw.githubusercontent.com/d-abhi/EKS-Test/main/iam_policy.json
 
 7. Create IAM Policy
 
